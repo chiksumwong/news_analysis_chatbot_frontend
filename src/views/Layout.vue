@@ -1,20 +1,21 @@
 <template>
   <div class="layout">
     <Navbar/>
-    <Content/>
+    <router-view/>
+    <Footer/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Navbar from "@/components/Layout/Navbar";
-import Content from "@/components/Layout/Content";
+import Footer from "@/components/Layout/Footer";
 
 export default {
   name: "layout",
   components: {
     Navbar,
-    Content
+    Footer
   }
 };
 </script>

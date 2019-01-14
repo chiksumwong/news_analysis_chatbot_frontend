@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Layout from "./views/Layout.vue";
+import Home from "./views/Home.vue";
+import Web from "./views/Web.vue";
 
 
 Vue.use(Router);
@@ -11,8 +12,14 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "layout",
-      component: Layout,
+      name: "home",
+      component: Home,
+      // children: [{ path: '', component: () => import('@/components/Layout/Content') 
+      // }]
+    },{
+      path: "/web",
+      name: "web",
+      component: Web,
       // children: [{ path: '', component: () => import('@/components/Layout/Content') 
       // }]
     },
