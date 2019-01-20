@@ -8,7 +8,9 @@
           <b-btn variant="info" @click="onSubmit">Submit</b-btn>
         </b-input-group-append>
       </b-input-group>
+    </b-card>
 
+    <b-card v-if="isResult">
       {{result}}
     </b-card>
   </div>
@@ -20,8 +22,10 @@ export default {
     return {
       url: "",
       result:"",
+      isResult: false,
     };
   },
+
   methods: {
 
     onSubmit() {
@@ -32,14 +36,15 @@ export default {
       const params = {
         url: this.url,
       };
-      this.axios.post('http://127.0.0.1:8000/api/checknewsbyurl/', {
-        params
+
+      this.axios.post('checknewsbyurl/', params, {
+        headers: {
+			    'content-type': 'application/json',
+		    },
       })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
+      .then((response) => {
+        this.isResult = true;
+        this.result = response.data;
       });
     }
   }
