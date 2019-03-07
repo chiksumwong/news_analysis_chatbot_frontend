@@ -10,27 +10,28 @@
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto">
+      <!-- <b-navbar-nav class="ml-auto"> -->
         <!-- Search -->
         <!-- <b-nav-form>
           <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>
           <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
         </b-nav-form>-->
-        <b-nav-item-dropdown text="Lang" right>
+        <!-- <b-nav-item-dropdown text="Lang" right>
           <b-dropdown-item href="#">EN</b-dropdown-item>
           <b-dropdown-item href="#">CN</b-dropdown-item>
         </b-nav-item-dropdown>
 
         <b-btn variant="primary" @click="login()" v-if="isLogin==false">Sign In</b-btn>
 
-        <b-nav-item-dropdown right v-else>
+        <b-nav-item-dropdown right v-else> -->
           <!-- Using button-content slot -->
-          <template slot="button-content">
+          <!-- <template slot="button-content">
             <em>User</em>
           </template>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
           <b-dropdown-item href="#" @click="logout()">Signout</b-dropdown-item>
-        </b-nav-item-dropdown>
+        </b-nav-item-dropdown> -->
+        
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
