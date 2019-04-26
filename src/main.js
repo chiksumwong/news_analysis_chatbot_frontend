@@ -12,7 +12,9 @@ import VueAxios from "vue-axios";
 
 Vue.config.productionTip = false;
 
-axios.defaults.baseURL = "http://127.0.0.1:8000/api/";
+axios.create({
+  baseURL: process.env.VUE_APP_BASE_API,
+})
 
 Vue.use(BootstrapVue);
 Vue.use(VueAxios, axios);
