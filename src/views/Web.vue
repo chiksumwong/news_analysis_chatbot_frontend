@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import NewsAPI from "@/api/News";
+
 export default {
   data() {
     return {
@@ -32,20 +34,17 @@ export default {
       this.checkNewsByUrl();
     },
 
-    checkNewsByUrl(){
-      const params = {
+    async checkNewsByUrl(){
+      const payload = {
         url: this.url,
       };
 
-      this.axios.post('checknewsbyurl/', params, {
-        headers: {
-			    'content-type': 'application/json',
-		    },
-      })
-      .then((response) => {
+      const res = await NewsAPI.checkNewsByUrl(payload);
+
+      if (res.data){
         this.isResult = true;
-        this.result = response.data;
-      });
+        this.result = res.data;
+      }
     }
   }
 };

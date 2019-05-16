@@ -20,15 +20,10 @@ npm run build
 npm run test
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+## True news websites:
+- https://www.nytimes.com/2019/01/18/opinion/sunday/cuba-healthcare-medicare.html?action=click&module=Opinion&pgtype=Homepage
 
-### Run your unit tests
-```
-npm run test:unit
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Fake news websites:
+- https://newspunch.com/ag-barr-mocks-pelosi-madam-speaker-bring-handcuffs/
+
