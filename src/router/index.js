@@ -4,10 +4,12 @@ import Router from 'vue-router'
 import Home from '@/views/Home'
 import Web from '@/views/Web'
 import NewsForm from '@/views/NewsForm'
+import Login from '@/views/user/Login'
+import Register from '@/views/user/Register'
 
 Vue.use(Router)
 
-export default new Router({
+export const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -23,6 +25,18 @@ export default new Router({
       path: "/news",
       name: "news",
       component: NewsForm
+    },{
+        path: '/login',
+        name: 'login',
+        component: Login
     },
+    {
+        path: '/register',
+        name: 'register',
+        component: Register
+    },
+
+    // otherwise redirect to home
+    { path: '*', redirect: '/' }
   ]
 })

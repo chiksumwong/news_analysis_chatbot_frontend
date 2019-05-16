@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import { router } from './router'
+import { store } from './store'
 
 import BootstrapVue from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
@@ -14,6 +15,8 @@ import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
 
 import VueDataTables from 'vue-data-tables'
+
+import CripNotice from 'crip-vue-notice'
 
 Vue.config.productionTip = false
 
@@ -34,7 +37,11 @@ locale.use(lang)
 // Vue table
 Vue.use(VueDataTables)
 
+// Notification
+Vue.use(CripNotice)
+
 new Vue({
   router,
+  store,
   render: function (h) { return h(App) }
 }).$mount('#app')
