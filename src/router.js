@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Home from '@/views/Home'
 import Web from '@/views/Web'
+import NewsForm from '@/views/NewsForm'
 
 Vue.use(Router)
 
@@ -18,6 +19,10 @@ export default new Router({
       path: "/web",
       name: "web",
       component: Web
+    },{
+      path: "/news",
+      name: "news",
+      component: NewsForm
     },
   ]
 })
