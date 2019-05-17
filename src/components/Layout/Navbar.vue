@@ -1,39 +1,33 @@
 <template>
   <b-navbar toggleable="md" type="dark" variant="info">
-    <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
     <b-navbar-brand href="/">News Analysis Chatbot</b-navbar-brand>
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-    <b-collapse is-nav id="nav_collapse">
-      <b-navbar-nav>
-        <b-nav-item href="/web">Web</b-nav-item>
-      </b-navbar-nav>
+    <b-collapse id="nav-collapse" is-nav>
 
-      <!-- Right aligned nav items -->
-      <!-- <b-navbar-nav class="ml-auto"> -->
-        <!-- Search -->
-        <!-- <b-nav-form>
-          <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>
-          <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
-        </b-nav-form>-->
-        <!-- <b-nav-item-dropdown text="Lang" right>
-          <b-dropdown-item href="#">EN</b-dropdown-item>
-          <b-dropdown-item href="#">CN</b-dropdown-item>
-        </b-nav-item-dropdown>
+        <!-- Right items -->
+        <b-navbar-nav class="ml-auto">
 
-        <b-btn variant="primary" @click="login()" v-if="isLogin==false">Sign In</b-btn>
+          <!-- Login and register button -->
+          <b-nav-form v-show="!isLogin">
+            <b-button size="sm" variant="success" href="/login" class="mr-sm-2" @click="login">Login</b-button>
+          </b-nav-form>
+          <b-nav-form v-show="!isLogin">
+            <b-button size="sm" variant="success" href="/register" class="my-2 my-sm-0" @click="register">Register
+            </b-button>
+          </b-nav-form>
 
-        <b-nav-item-dropdown right v-else> -->
-          <!-- Using button-content slot -->
-          <!-- <template slot="button-content">
-            <em>User</em>
-          </template>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#" @click="logout()">Signout</b-dropdown-item>
-        </b-nav-item-dropdown> -->
-        
-      </b-navbar-nav>
-    </b-collapse>
+          <!-- User -->
+          <b-nav-item-dropdown right v-show="isLogin">
+            <template slot="button-content" class="text-uppercase"><em>{{username}}</em></template>
+            <b-dropdown-item @click="logout">Logout</b-dropdown-item>
+          </b-nav-item-dropdown>
+
+        </b-navbar-nav>
+      </b-collapse>
+
+
   </b-navbar>
 </template>
 
@@ -41,17 +35,27 @@
 export default {
   data() {
     return {
-      isLogin: false
     };
   },
   methods: {
+    register() {
+      this.$route.push('/register')
+    },
     login() {
-      this.isLogin = true;
+      this.$route.push('/login')
     },
     logout() {
-      this.isLogin = false;
+      this.$store.dispatch('user/logout')
+    },
+  },
+    computed: {
+      isLogin() {
+        return this.$store.state.user.status.isLogin
+      },
+      username() {
+        return this.$store.state.user.username
+      }
     }
-  }
 };
 </script>
 

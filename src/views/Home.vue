@@ -1,61 +1,73 @@
 <template>
-  <div class="container">
-    <b-card>
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-        <!-- Title -->
-        <b-form-group id="inputGroup1" label="Title" label-for="input1">
-          <b-form-input id="exampleInput1" v-model="form.title" required placeholder="Enter title"></b-form-input>
-        </b-form-group>
 
-        <!-- Text -->
-        <b-form-group id="inputGroup2" label="Text" label-for="textarea1">
-          <b-form-textarea
-            id="textarea1"
-            v-model="form.text"
-            placeholder="Enter text"
-            :rows="28"
-            :max-rows="100"
-            required
-          ></b-form-textarea>
-        </b-form-group>
+<div class="container">
+  <br/>
 
-        <b-button type="submit" variant="primary">Submit</b-button>
-        <b-button type="reset" variant="danger">Reset</b-button>
-      </b-form>
-    </b-card>
+   <el-row>
+     <el-button type="primary" @click="chekcNews">Check News By Inputing News</el-button>
+    <el-button type="success" @click="chekcNewsByUrl">Check News By Url</el-button>
+  </el-row>
+  <br/>
+
+  <div class="card">
+    <data-tables :data="data" :pagination-props="{ pageSizes: [5, 10, 15] }">
+     <el-table-column v-for="title in titles" :prop="title.prop" :label="title.label" :key="title.label">
+     </el-table-column>
+    </data-tables>
   </div>
-</template>
+  
+</div>
 
-<script>
-export default {
-  data() {
-    return {
-      form: {
-        title: "",
-        text: ""
-      },
-      show: true
-    };
-  },
-  methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
+
+
+ </template>
+
+ <script>
+ export default {
+   data() {
+     return {
+
+       data: [{
+            "content": "Water flood",
+            "flow_no": "FW201601010001",
+            "flow_type": "Repair",
+            "flow_type_code": "repair",
+            }, {
+            "content": "Lock broken",
+            "flow_no": "FW201601010002",
+            "flow_type": "Repair",
+            "flow_type_code": "repair",
+            }, {
+            "content": "Help to buy some drinks",
+            "flow_no": "FW201601010003",
+            "flow_type": "Help",
+            "flow_type_code": "help"
+        }],
+
+       titles: [{
+            prop: "flow_no",
+            label: "NO."
+            }, {
+            prop: "content",
+            label: "Content"
+            }, {
+            prop: "flow_type",
+            label: "Type"
+        }],
+     }
+   },
+   methods: {
+    chekcNews() {
+      this.$router.push('/news')
     },
-    onReset(evt) {
-      evt.preventDefault();
-      /* Reset our form values */
-      this.form.title = "";
-      this.form.text = "";
-      /* Trick to reset/clear native browser form validation state */
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
+    chekcNewsByUrl(){
+      this.$router.push('/web')
     }
+    
   }
-};
-</script>
+ }
+ </script>
 
 <style>
+
 </style>
