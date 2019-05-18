@@ -121,10 +121,10 @@ export default {
 
       if (res.data) {
         console.log("register success", res.data);
-        this.$store.dispatch("user/login", {
-          username,
-          password
-        });
+        // this.$store.dispatch("user/login", {
+        //   username,
+        //   password
+        // });
       } else {
         console.log("Fail", res.err);
       }

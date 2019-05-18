@@ -1,11 +1,8 @@
 <template>
   <b-navbar toggleable="md" type="dark" variant="info">
-
     <b-navbar-brand href="/">News Analysis Chatbot</b-navbar-brand>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
     <b-collapse id="nav-collapse" is-nav>
-
         <!-- Right items -->
         <b-navbar-nav class="ml-auto">
 
@@ -13,9 +10,14 @@
           <b-nav-form v-show="!isLogin">
             <b-button size="sm" variant="success" href="/login" class="mr-sm-2" @click="login">Login</b-button>
           </b-nav-form>
-          <b-nav-form v-show="!isLogin">
+
+          <!-- <b-nav-form v-show="!isLogin">
             <b-button size="sm" variant="success" href="/register" class="my-2 my-sm-0" @click="register">Register
             </b-button>
+          </b-nav-form> -->
+
+          <b-nav-form v-show="isLogin">
+            <b-button @click="toDashboard">Dashboard</b-button>
           </b-nav-form>
 
           <!-- User -->
@@ -26,8 +28,6 @@
 
         </b-navbar-nav>
       </b-collapse>
-
-
   </b-navbar>
 </template>
 
@@ -38,11 +38,14 @@ export default {
     };
   },
   methods: {
+    toDashboard() {
+      this.$router.push('/dashboard')
+    },
     register() {
-      this.$route.push('/register')
+      this.$router.push('/register')
     },
     login() {
-      this.$route.push('/login')
+      this.$router.push('/login')
     },
     logout() {
       this.$store.dispatch('user/logout')
