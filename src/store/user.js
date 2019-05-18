@@ -9,7 +9,6 @@ export default {
             isLogin:false
         },
         username:null,
-        user_id:null
     },
     actions: {
         async login({ commit }, payload) {
@@ -19,17 +18,20 @@ export default {
                 console.log('login success', res.data);
 
                 // set local storage
-                // localStorage.setItem('token', res.data.token);
-                commit('loginSuccess', res.data);
-
+                localStorage.setItem('token', res.data.access);
+                commit('loginSuccess', payload.username);
+                
+                // notification
                 Vue.prototype.$notice.success({
                     title: 'Login Success',
                     description: 'Enjoy your shopping!'
                 })
 
+                // route to home page
                 router.push('/'); 
             }catch(e){
                 console.log(e)
+                // notification
                 Vue.prototype.$notice.error({
                     title: 'Login Failure',
                     description: 'Please Check Your Email and Password!'
@@ -38,27 +40,24 @@ export default {
             }
         },
         logout({ commit }) {
-            // remove local storage
-            // localStorage.removeItem('token');
+            //remove local storage
+            localStorage.removeItem('token');
             commit('logout');
             router.push('/');
         }
     },
     mutations: {
-        loginSuccess(state, user) {
+        loginSuccess(state, user_name) {
             state.status = { isLogin: true };
-            state.username = user.user_name;
-            state.user_id = user.user_id;
+            state.username = user_name;
         },
         loginFailure(state) {
             state.status = { isLogin: false };
             state.username = null;
-            state.user_id = null;
         },
         logout(state) {
             state.status = { isLogin: false };
             state.username = null;
-            state.user_id = null;
         }
     }
 }

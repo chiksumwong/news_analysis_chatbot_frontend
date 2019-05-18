@@ -122,7 +122,7 @@ export default {
       if (res.data) {
         console.log("register success", res.data);
         this.$store.dispatch("user/login", {
-          email,
+          username,
           password
         });
       } else {

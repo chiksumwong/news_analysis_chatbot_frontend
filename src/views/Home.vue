@@ -15,7 +15,8 @@
           :prop="title.prop"
           :label="title.label"
           :key="title.label"
-           :width="title.width"
+          :width="title.width"
+          sortable
         ></el-table-column>
       </data-tables>
     </div>
