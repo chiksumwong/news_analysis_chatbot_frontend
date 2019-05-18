@@ -1,7 +1,12 @@
 <template>
   <b-navbar toggleable="md" type="dark" variant="info">
-    <b-navbar-brand href="/">News Analysis Chatbot</b-navbar-brand>
+
+    <b-navbar-brand href="/" v-show="!isLogin">News Analysis Chatbot</b-navbar-brand>
+
+    <b-navbar-brand href="/" v-show="isLogin">News Analysis Chatbot Dashboard</b-navbar-brand>
+
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
     <b-collapse id="nav-collapse" is-nav>
         <!-- Right items -->
         <b-navbar-nav class="ml-auto">
@@ -16,9 +21,19 @@
             </b-button>
           </b-nav-form> -->
 
-          <b-nav-form v-show="isLogin">
-            <b-button @click="toDashboard">Dashboard</b-button>
-          </b-nav-form>
+          <b-nav-item-dropdown text="Record" right v-show="isLogin">
+            <b-dropdown-item href="#">List</b-dropdown-item>
+            <b-dropdown-item href="#">Create</b-dropdown-item>
+          </b-nav-item-dropdown>
+
+          <b-nav-item-dropdown text="News" right v-show="isLogin">
+            <b-dropdown-item href="#">List</b-dropdown-item>
+            <b-dropdown-item href="#">Create</b-dropdown-item>
+          </b-nav-item-dropdown>
+
+          <b-nav-item-dropdown text="User" right v-show="isLogin">
+            <b-dropdown-item href="/register">Create</b-dropdown-item>
+          </b-nav-item-dropdown>
 
           <!-- User -->
           <b-nav-item-dropdown right v-show="isLogin">
@@ -28,6 +43,7 @@
 
         </b-navbar-nav>
       </b-collapse>
+
   </b-navbar>
 </template>
 

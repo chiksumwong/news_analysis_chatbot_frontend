@@ -6,8 +6,6 @@ import Web from '@/views/Web'
 import NewsForm from '@/views/NewsForm'
 import Login from '@/views/user/Login'
 import Register from '@/views/user/Register'
-import Dashboard from '@/views/dashboard/Dashboard'
-import ListRecord from '@/components/record/ListRecord'
 
 Vue.use(Router)
 
@@ -35,16 +33,6 @@ export const router = new Router({
       path: '/register',
       name: 'register',
       component: Register
-    },
-    {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: Dashboard,
-      children: [{
-        path: '/',
-        name: 'dashboard.list',
-        component: ListRecord
-      }, ]
     },
 
     // otherwise redirect to home
