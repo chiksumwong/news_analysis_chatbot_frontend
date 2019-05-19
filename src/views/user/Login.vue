@@ -9,8 +9,8 @@
 
       <div class="card-body">
         <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px">
-          <el-form-item label="Email" prop="email">
-            <el-input type="Email" v-model="ruleForm.email" autocomplete="off"></el-input>
+          <el-form-item label="Username" prop="username">
+            <el-input type="text" v-model="ruleForm.username" autocomplete="off"></el-input>
           </el-form-item>
 
           <el-form-item label="Password" prop="password">
@@ -30,11 +30,11 @@
 <script>
 export default {
   data() {
-    var validateEmail = (rule, value, callback) => {
+    var validateUsername = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("Please input the email"));
+        callback(new Error("Please input the username"));
       } else {
-        if (this.ruleForm.email !== "") {
+        if (this.ruleForm.username !== "") {
         }
         callback();
       }
@@ -52,11 +52,11 @@ export default {
 
     return {
       ruleForm: {
-        email: "",
+        username: "",
         password: ""
       },
       rules: {
-        email: [{ required: true, validator: validateEmail, trigger: "blur" }],
+        username: [{ required: true, validator: validateUsername, trigger: "blur" }],
         password: [{ required: true, validator: validatePass, trigger: "blur" }]
       }
     };
@@ -77,11 +77,11 @@ export default {
       this.$refs[formName].resetFields();
     },
     login() {
-      const email = this.ruleForm.email;
+      const username = this.ruleForm.username;
       const password = this.ruleForm.password;
-      if (email && password) {
+      if (username && password) {
         this.$store.dispatch("user/login", {
-          email,
+          username,
           password
         });
       }

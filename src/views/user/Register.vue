@@ -4,7 +4,7 @@
     <div class="card" style="width: 50rem;">
       <div class="card-header bg-dark text-light text">
         <i class="fas fa-file-alt"></i>
-        Register
+        Create User
       </div>
 
       <div class="card-body">
@@ -28,7 +28,7 @@
           </el-form-item>
 
           <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm')">Register</el-button>
+            <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
             <el-button @click="resetForm('ruleForm')">Reset</el-button>
           </el-form-item>
         </el-form>
@@ -121,10 +121,13 @@ export default {
 
       if (res.data) {
         console.log("register success", res.data);
-        this.$store.dispatch("user/login", {
-          email,
-          password
-        });
+        this.$notice.success({
+              title: 'User Created',
+        })
+        this.ruleForm.username = ""
+        this.ruleForm.email = ""
+        this.ruleForm.password = ""
+        this.ruleForm.checkPass = ""
       } else {
         console.log("Fail", res.err);
       }

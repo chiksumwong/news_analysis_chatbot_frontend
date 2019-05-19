@@ -9,7 +9,7 @@ export default {
             isLogin:false
         },
         username:null,
-        user_id:null
+        isAdmin:false
     },
     actions: {
         async login({ commit }, payload) {
@@ -19,27 +19,34 @@ export default {
                 console.log('login success', res.data);
 
                 // set local storage
-                // localStorage.setItem('token', res.data.token);
-                commit('loginSuccess', res.data);
-
+                localStorage.setItem('token', res.data.access);
+                let isAdmin = false
+                if(payload.username === "admin"){
+                    isAdmin = true
+                }
+                commit('loginSuccess', { "username":payload.username, "isAdmin": isAdmin});
+                
+                // notification
                 Vue.prototype.$notice.success({
                     title: 'Login Success',
-                    description: 'Enjoy your shopping!'
+                    description: 'Welcome!'
                 })
 
+                // route to home page
                 router.push('/'); 
             }catch(e){
                 console.log(e)
+                // notification
                 Vue.prototype.$notice.error({
                     title: 'Login Failure',
-                    description: 'Please Check Your Email and Password!'
+                    description: 'Please Check Your Username and Password!'
                 })
                 commit('loginFailure');
             }
         },
         logout({ commit }) {
-            // remove local storage
-            // localStorage.removeItem('token');
+            //remove local storage
+            localStorage.removeItem('token');
             commit('logout');
             router.push('/');
         }
@@ -47,18 +54,18 @@ export default {
     mutations: {
         loginSuccess(state, user) {
             state.status = { isLogin: true };
-            state.username = user.user_name;
-            state.user_id = user.user_id;
+            state.username = user.username;
+            state.isAdmin= user.isAdmin
         },
         loginFailure(state) {
             state.status = { isLogin: false };
             state.username = null;
-            state.user_id = null;
+            state.isAdmin= false;
         },
         logout(state) {
             state.status = { isLogin: false };
             state.username = null;
-            state.user_id = null;
+            state.isAdmin= false;
         }
     }
 }
