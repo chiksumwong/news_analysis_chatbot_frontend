@@ -11,7 +11,7 @@
 </template>
 
  <script>
-import listReocrd from "@/components/record/ListRecord";
+import listReocrd from "@/components/record/ListRecord.vue";
 
 export default {
   methods: {
