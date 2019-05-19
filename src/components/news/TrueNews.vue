@@ -1,14 +1,19 @@
 <template>
-  <data-tables :data="data" :pagination-props="{ pageSizes: [5, 10, 15] }">
-    <el-table-column
-      v-for="title in titles"
-      :prop="title.prop"
-      :label="title.label"
-      :key="title.label"
-      :width="title.width"
-      sortable
-    ></el-table-column>
-  </data-tables>
+  <b-card>
+    <data-tables
+      :data="data"
+      :pagination-props="{ pageSizes: [5, 10, 15] }"
+    >
+      <el-table-column
+        v-for="title in titles"
+        :prop="title.prop"
+        :label="title.label"
+        :key="title.label"
+        :width="title.width"
+        sortable
+      ></el-table-column>
+    </data-tables>
+  </b-card>
 </template>
 
 <script>
@@ -51,9 +56,13 @@ export default {
     async loadNews() {
       const res = await NewsAPI.getAllNews();
       if (res.data) {
-        console.log("load records success", res.data);
+        console.log("load true news success", res.data);
 
-        this.data = res.data.results;
+        let filter = res.data.results.filter(function(item, index, array) {
+          return item.label === "True";
+        });
+
+        this.data = filter;
       } else {
         console.log("Fail", res.err);
       }

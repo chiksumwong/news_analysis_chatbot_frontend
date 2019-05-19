@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <div>
     <br>
     <el-row>
       <el-button type="primary" @click="chekcNews">Check News By Inputing News</el-button>
@@ -7,8 +7,7 @@
     </el-row>
     <br>
     <listReocrd/>
-    <br>
-  </b-container>
+  </div>
 </template>
 
  <script>

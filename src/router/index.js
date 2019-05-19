@@ -9,7 +9,9 @@ import Register from '@/views/user/Register'
 import Volunteer from '@/views/user/Volunteer'
 import ListNews from '@/components/news/ListNews'
 import CreateNews from '@/components/news/CreateNews'
-import UpdateNews from '@/components/news/UpdateNews'
+import NoneNews from '@/components/news/NoneNews'
+import TrueNews from '@/components/news/TrueNews'
+import FalseNews from '@/components/news/FalseNews'
 
 Vue.use(Router)
 
@@ -50,27 +52,22 @@ export const router = new Router({
     {
       path: '/news/none',
       name: 'news.none',
-      component: ListNews
+      component: NoneNews
     },
     {
       path: '/news/true',
       name: 'news.true',
-      component: ListNews
+      component: TrueNews
     },
     {
       path: '/news/false',
       name: 'news.false',
-      component: ListNews
+      component: FalseNews
     },
     {
       path: '/news/create',
       name: 'news.create',
       component: CreateNews
-    },
-    {
-      path: '/news/update',
-      name: 'news.update',
-      component: UpdateNews
     },
 
     // otherwise redirect to home

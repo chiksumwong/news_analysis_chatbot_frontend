@@ -1,20 +1,20 @@
 <template>
-<b-container>
-    <br/>
-    <b-card>
-      <data-tables :data="data" :pagination-props="{ pageSizes: [5, 10, 15] }" >
-        <el-table-column
-          v-for="title in titles"
-          :prop="title.prop"
-          :label="title.label"
-          :key="title.label"
-          :width="title.width"
-          sortable
-        ></el-table-column>
-      </data-tables>
-    </b-card>
-    <br/>
-</b-container>
+  <b-card>
+    <data-tables
+      :data="data"
+      :pagination-props="{ pageSizes: [5, 10, 15] }"
+      :action-col="actionCol"
+    >
+      <el-table-column
+        v-for="title in titles"
+        :prop="title.prop"
+        :label="title.label"
+        :key="title.label"
+        :width="title.width"
+        sortable
+      ></el-table-column>
+    </data-tables>
+  </b-card>
 </template>
 
 <script>
@@ -33,7 +33,7 @@ export default {
         {
           prop: "statement",
           label: "Statement",
-          width: "800"
+          width: "1400"
         },
         {
           prop: "label",
@@ -50,7 +50,35 @@ export default {
           label: "Created",
           width: "100"
         }
-      ]
+      ],
+      actionCol: {
+        label: "Label",
+        props: {
+          align: "center"
+        },
+
+        buttons: [
+          {
+            props: {
+              type: "success"
+            },
+            handler: row => {
+              this.$message("Edit clicked");
+              console.log(row)
+            },
+            label: "True"
+          },
+          {
+            props: {
+              type: "danger"
+            },
+            handler: row => {
+              this.data.splice(this.data.indexOf(row), 1);
+            },
+            label: "False"
+          }
+        ]
+      }
     };
   },
   methods: {
@@ -59,7 +87,11 @@ export default {
       if (res.data) {
         console.log("load records success", res.data);
 
-        this.data = res.data.results;
+        let filter = res.data.results.filter(function(item, index, array) {
+          return item.label === "None";
+        });
+
+        this.data = filter;
       } else {
         console.log("Fail", res.err);
       }
@@ -72,5 +104,4 @@ export default {
 </script>
 
 <style>
-
 </style>

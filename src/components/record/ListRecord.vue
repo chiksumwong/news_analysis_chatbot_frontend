@@ -1,16 +1,14 @@
 <template>
-    <div class="card">
-      <data-tables :data="data" :pagination-props="{ pageSizes: [5, 10, 15] }" >
-        <el-table-column
-          v-for="title in titles"
-          :prop="title.prop"
-          :label="title.label"
-          :key="title.label"
-          :width="title.width"
-          sortable
-        ></el-table-column>
-      </data-tables>
-    </div>
+  <data-tables :data="data" :pagination-props="{ pageSizes: [5, 10, 15] }">
+    <el-table-column
+      v-for="title in titles"
+      :prop="title.prop"
+      :label="title.label"
+      :key="title.label"
+      :width="title.width"
+      sortable
+    ></el-table-column>
+  </data-tables>
 </template>
 
 <script>
@@ -29,22 +27,22 @@ export default {
         {
           prop: "text",
           label: "Text",
-          width: "800"
+          width: "1500"
         },
         {
           prop: "result",
           label: "Result",
-          width: "80"
+          width: "100"
         },
         {
           prop: "probability",
           label: "Probability",
-          width: "100"
+          width: "120"
         },
         {
           prop: "created",
           label: "Created",
-          width: "100"
+          width: "160"
         }
       ]
     };
@@ -68,5 +66,4 @@ export default {
 </script>
 
 <style>
-
 </style>
