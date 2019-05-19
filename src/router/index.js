@@ -7,6 +7,9 @@ import CreateRecordByUrl from '@/components/record/CreateRecordByURL'
 import Login from '@/views/user/Login'
 import Register from '@/views/user/Register'
 import Volunteer from '@/views/user/Volunteer'
+import ListNews from '@/components/news/ListNews'
+import CreateNews from '@/components/news/CreateNews'
+import UpdateNews from '@/components/news/UpdateNews'
 
 Vue.use(Router)
 
@@ -38,6 +41,36 @@ export const router = new Router({
       path: '/user/create',
       name: 'register',
       component: Register
+    },
+    {
+      path: '/news',
+      name: 'news',
+      component: ListNews
+    },
+    {
+      path: '/news/none',
+      name: 'news.none',
+      component: ListNews
+    },
+    {
+      path: '/news/true',
+      name: 'news.true',
+      component: ListNews
+    },
+    {
+      path: '/news/false',
+      name: 'news.false',
+      component: ListNews
+    },
+    {
+      path: '/news/create',
+      name: 'news.create',
+      component: CreateNews
+    },
+    {
+      path: '/news/update',
+      name: 'news.update',
+      component: UpdateNews
     },
 
     // otherwise redirect to home

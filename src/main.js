@@ -24,10 +24,26 @@ Vue.config.productionTip = false
 // Bootstrap
 Vue.use(BootstrapVue);
 // Axios
-const http = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API
+const instance  = axios.create({
+  // baseURL: (process.env.VUE_APP_BASE_URL !== undefined) ? process.env.VUE_APP_BASE_URL : 'http://localhost:3000/api/v1/'
+  baseURL: process.env.VUE_APP_BASE_API,
 })
-Vue.prototype.$axios = http;
+instance.interceptors.request.use(
+ (config) => {
+   let token = localStorage.getItem('token');
+
+   if (token) {
+     const authToken = 'Bearer ' + token
+     config.headers['Authorization'] = authToken
+   }
+
+   return config
+ },
+ (error) => {
+   return Promise.reject(error)
+ }
+)
+Vue.prototype.$axios = instance ;
 
 // Element UI
 Vue.use(ElementUI);

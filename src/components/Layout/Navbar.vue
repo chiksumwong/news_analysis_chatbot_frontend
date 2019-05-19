@@ -29,8 +29,11 @@
           </b-nav-item-dropdown> -->
 
           <b-nav-item-dropdown text="News" right v-show="isLogin">
-            <b-dropdown-item href="#">List</b-dropdown-item>
-            <b-dropdown-item href="#">Create</b-dropdown-item>
+            <b-dropdown-item href="/news">List</b-dropdown-item>
+            <b-dropdown-item href="/news/none">Not Label</b-dropdown-item>
+            <b-dropdown-item href="/news/true">Real News</b-dropdown-item>
+            <b-dropdown-item href="/news/false">Fake News</b-dropdown-item>
+            <b-dropdown-item href="/news/create">Create</b-dropdown-item>
           </b-nav-item-dropdown>
 
           <b-nav-item-dropdown text="User" right v-show="isAdmin">
