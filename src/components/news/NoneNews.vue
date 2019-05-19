@@ -63,8 +63,8 @@ export default {
               type: "success"
             },
             handler: row => {
-              this.$message("Edit clicked");
               console.log(row)
+              this.updateNews(row.id, row.statement, "True")
             },
             label: "True"
           },
@@ -73,7 +73,7 @@ export default {
               type: "danger"
             },
             handler: row => {
-              this.data.splice(this.data.indexOf(row), 1);
+              this.updateNews(row.id, row.statement, "False")
             },
             label: "False"
           }
@@ -92,6 +92,25 @@ export default {
         });
 
         this.data = filter;
+      } else {
+        console.log("Fail", res.err);
+      }
+    },
+    async updateNews(news_id, input_statement, input_lable) {
+      const payload = {
+        statement: input_statement,
+        label: input_lable
+      };
+
+      const res = await NewsAPI.updateNewsById(news_id, payload);
+      if (res.data) {
+        console.log("update news success", res.data);
+
+        this.$notice.success({
+            title: 'News Updated',
+        })
+        
+        this.loadNews();
       } else {
         console.log("Fail", res.err);
       }
