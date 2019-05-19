@@ -9,6 +9,7 @@ export default {
             isLogin:false
         },
         username:null,
+        isAdmin:false
     },
     actions: {
         async login({ commit }, payload) {
@@ -19,12 +20,16 @@ export default {
 
                 // set local storage
                 localStorage.setItem('token', res.data.access);
-                commit('loginSuccess', payload.username);
+                let isAdmin = false
+                if(payload.username === "admin"){
+                    isAdmin = true
+                }
+                commit('loginSuccess', { "username":payload.username, "isAdmin": isAdmin});
                 
                 // notification
                 Vue.prototype.$notice.success({
                     title: 'Login Success',
-                    description: 'Enjoy your shopping!'
+                    description: 'Welcome!'
                 })
 
                 // route to home page
@@ -34,7 +39,7 @@ export default {
                 // notification
                 Vue.prototype.$notice.error({
                     title: 'Login Failure',
-                    description: 'Please Check Your Email and Password!'
+                    description: 'Please Check Your Username and Password!'
                 })
                 commit('loginFailure');
             }
@@ -47,17 +52,20 @@ export default {
         }
     },
     mutations: {
-        loginSuccess(state, user_name) {
+        loginSuccess(state, user) {
             state.status = { isLogin: true };
-            state.username = user_name;
+            state.username = user.username;
+            state.isAdmin= user.isAdmin
         },
         loginFailure(state) {
             state.status = { isLogin: false };
             state.username = null;
+            state.isAdmin= false;
         },
         logout(state) {
             state.status = { isLogin: false };
             state.username = null;
+            state.isAdmin= false;
         }
     }
 }

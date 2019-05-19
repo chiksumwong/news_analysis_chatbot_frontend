@@ -61,10 +61,10 @@ export default {
   },
   methods: {
     chekcNews() {
-      this.$router.push("/news");
+      this.$router.push("/news/text");
     },
     chekcNewsByUrl() {
-      this.$router.push("/web");
+      this.$router.push("/news/url");
     },
     async loadRecords() {
       const res = await RecordAPI.getAllRecords();

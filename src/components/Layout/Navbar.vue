@@ -3,7 +3,9 @@
 
     <b-navbar-brand href="/" v-show="!isLogin">News Analysis Chatbot</b-navbar-brand>
 
-    <b-navbar-brand href="/" v-show="isLogin">News Analysis Chatbot Dashboard</b-navbar-brand>
+    <b-navbar-brand href="/" v-show="isAdmin">News Analysis Chatbot Dashboard</b-navbar-brand>
+
+    <b-navbar-brand href="/" v-show="!isAdmin && isLogin">News Analysis Chatbot</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -16,23 +18,23 @@
             <b-button size="sm" variant="success" href="/login" class="mr-sm-2" @click="login">Login</b-button>
           </b-nav-form>
 
-          <!-- <b-nav-form v-show="!isLogin">
-            <b-button size="sm" variant="success" href="/register" class="my-2 my-sm-0" @click="register">Register
+          <b-nav-form v-show="!isLogin">
+            <b-button size="sm" variant="success" href="/volunteer" class="my-2 my-sm-0" @click="register">Volunteer Register
             </b-button>
-          </b-nav-form> -->
+          </b-nav-form>
 
-          <b-nav-item-dropdown text="Record" right v-show="isLogin">
+          <!-- <b-nav-item-dropdown text="Record of News Analysis" right v-show="isLogin">
             <b-dropdown-item href="#">List</b-dropdown-item>
             <b-dropdown-item href="#">Create</b-dropdown-item>
-          </b-nav-item-dropdown>
+          </b-nav-item-dropdown> -->
 
           <b-nav-item-dropdown text="News" right v-show="isLogin">
             <b-dropdown-item href="#">List</b-dropdown-item>
             <b-dropdown-item href="#">Create</b-dropdown-item>
           </b-nav-item-dropdown>
 
-          <b-nav-item-dropdown text="User" right v-show="isLogin">
-            <b-dropdown-item href="/register">Create</b-dropdown-item>
+          <b-nav-item-dropdown text="User" right v-show="isAdmin">
+            <b-dropdown-item href="/user/create">Create</b-dropdown-item>
           </b-nav-item-dropdown>
 
           <!-- User -->
@@ -73,7 +75,10 @@ export default {
       },
       username() {
         return this.$store.state.user.username
-      }
+      },
+      isAdmin() {
+        return this.$store.state.user.isAdmin
+      },
     }
 };
 </script>

@@ -121,10 +121,13 @@ export default {
 
       if (res.data) {
         console.log("register success", res.data);
-        // this.$store.dispatch("user/login", {
-        //   username,
-        //   password
-        // });
+        this.$notice.success({
+              title: 'User Created',
+        })
+        this.ruleForm.username = ""
+        this.ruleForm.email = ""
+        this.ruleForm.password = ""
+        this.ruleForm.checkPass = ""
       } else {
         console.log("Fail", res.err);
       }
