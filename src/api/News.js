@@ -7,6 +7,7 @@ const NewsAPI = {
     getAllNews: () => Vue.prototype.$axios.get('/api/news/'),
     createNews: payload => Vue.prototype.$axios.post('/api/news/', payload),
     updateNewsById: (newsId, payload) => Vue.prototype.$axios.put('/api/news/' + newsId + '/', payload ),
+    deleteNewsById: (newsId) => Vue.prototype.$axios.delete('/api/news/' + newsId + '/'),
 }
 
 export default NewsAPI

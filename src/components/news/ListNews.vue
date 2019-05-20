@@ -8,6 +8,13 @@
       :width="title.width"
       sortable
     ></el-table-column>
+
+    <el-table-column label="Actions" min-width="100px" v-if="isAdmin">
+       <template slot-scope="scope">
+        <el-button type="danger" @click="deleteNews(scope.row)">Delete</el-button>
+      </template>
+    </el-table-column>
+
   </data-tables>
 </template>
 
@@ -57,10 +64,26 @@ export default {
       } else {
         console.log("Fail", res.err);
       }
+    },
+    async deleteNews(row) {
+      console.log("delete row", row);
+      let id = row.id
+      const res = await NewsAPI.deleteNewsById(id);
+      // notification
+      this.$notice.success({
+        title: 'Delete Success',
+        description: 'News is deleted!'
+      })    
+      this.loadNews()
     }
   },
   mounted() {
     this.loadNews();
+  },
+  computed: {
+    isAdmin() {
+      return this.$store.state.user.isAdmin;
+    }
   }
 };
 </script>

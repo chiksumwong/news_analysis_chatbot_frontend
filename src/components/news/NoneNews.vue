@@ -1,10 +1,6 @@
 <template>
   <b-card>
-    <data-tables
-      :data="data"
-      :pagination-props="{ pageSizes: [5, 10, 15] }"
-      :action-col="actionCol"
-    >
+    <data-tables :data="data" :pagination-props="{ pageSizes: [5, 10, 15] }">
       <el-table-column
         v-for="title in titles"
         :prop="title.prop"
@@ -13,6 +9,19 @@
         :width="title.width"
         sortable
       ></el-table-column>
+
+      <el-table-column label="Label">
+        <template slot-scope="scope">
+          <el-button type="success" @click="updateNews(scope.row, 'True')">True</el-button>
+          <el-button type="info" @click="updateNews(scope.row, 'False')">False</el-button>
+        </template>
+      </el-table-column>
+
+      <el-table-column label="Actions" v-if="isAdmin">
+        <template slot-scope="scope">
+          <el-button type="danger" @click="deleteNews(scope.row)">Delete</el-button>
+        </template>
+      </el-table-column>
     </data-tables>
   </b-card>
 </template>
@@ -33,7 +42,7 @@ export default {
         {
           prop: "statement",
           label: "Statement",
-          width: "1400"
+          width: "1300"
         },
         {
           prop: "label",
@@ -50,35 +59,7 @@ export default {
           label: "Created",
           width: "100"
         }
-      ],
-      actionCol: {
-        label: "Label",
-        props: {
-          align: "center"
-        },
-
-        buttons: [
-          {
-            props: {
-              type: "success"
-            },
-            handler: row => {
-              console.log(row)
-              this.updateNews(row.id, row.statement, "True")
-            },
-            label: "True"
-          },
-          {
-            props: {
-              type: "danger"
-            },
-            handler: row => {
-              this.updateNews(row.id, row.statement, "False")
-            },
-            label: "False"
-          }
-        ]
-      }
+      ]
     };
   },
   methods: {
@@ -96,7 +77,10 @@ export default {
         console.log("Fail", res.err);
       }
     },
-    async updateNews(news_id, input_statement, input_lable) {
+    async updateNews(row, input_lable) {
+      let news_id = row.id;
+      let input_statement = row.statement;
+
       const payload = {
         statement: input_statement,
         label: input_lable
@@ -107,17 +91,33 @@ export default {
         console.log("update news success", res.data);
 
         this.$notice.success({
-            title: 'News Updated',
-        })
-        
+          title: "News Updated"
+        });
+
         this.loadNews();
       } else {
         console.log("Fail", res.err);
       }
+    },
+    async deleteNews(row) {
+      console.log("delete row", row);
+      let id = row.id;
+      const res = await NewsAPI.deleteNewsById(id);
+      // notification
+      this.$notice.success({
+        title: "Delete Success",
+        description: "News is deleted!"
+      });
+      this.loadNews();
     }
   },
   mounted() {
     this.loadNews();
+  },
+  computed: {
+    isAdmin() {
+      return this.$store.state.user.isAdmin;
+    }
   }
 };
 </script>
