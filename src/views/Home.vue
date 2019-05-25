@@ -2,8 +2,8 @@
   <div>
     <br>
     <el-row>
-      <el-button type="primary" @click="chekcNews">Check News By Inputing News</el-button>
-      <el-button type="success" @click="chekcNewsByUrl">Check News By Url</el-button>
+      <el-button type="primary" @click="chekcNews">Check News by Text</el-button>
+      <el-button type="success" @click="chekcNewsByUrl">Check News by URL</el-button>
     </el-row>
     <br>
     <listReocrd/>
